@@ -4,7 +4,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Patient from './pages/patient';
 import Condition from './pages/condition';
 import Observation from './pages/observation';
-import FamilyMemberHistory from './pages/familyMemberHistory';
 import QuestionnaireResponse from './pages/questionnaireResponse';
 
 const Routes = createAppContainer(
@@ -12,7 +11,6 @@ const Routes = createAppContainer(
         Patient,
         Observation,
         Condition,
-        FamilyMemberHistory,
         QuestionnaireResponse,
     })
 );

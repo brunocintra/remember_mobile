@@ -6,7 +6,6 @@ import api from '../services/api';
 
 import patientIcon from '../../assets/patient-icon.png';
 import iconObservation from '../../assets/icon-observation.png'
-import iconHistory from '../../assets/icon-history.png'
 import iconQuestion from '../../assets/icon-question.png'
 import iconCondition from '../../assets/icon-condition.png'
 
@@ -20,10 +19,6 @@ export default function PatientList({ navigation }){
         navigation.navigate('Condition');
     }
 
-    function handleFamilyMemberHistory(){
-        navigation.navigate('FamilyMemberHistory');
-    }
-    
     function handleQuestionnaireResponse(){
         navigation.navigate('QuestionnaireResponse');
     }
@@ -54,9 +49,6 @@ export default function PatientList({ navigation }){
                         <View style={styles.buttonsContainer}>
                         <TouchableOpacity style={styles.button} onPress={handleObservation}>
                                 <Image source={iconObservation} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.button} onPress={handleFamilyMemberHistory}>
-                                <Image source={iconHistory} />
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.button} onPress={handleCondition}>
                                 <Image source={iconCondition} />
