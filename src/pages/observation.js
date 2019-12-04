@@ -1,14 +1,15 @@
 import React from 'react';
 import { SafeAreaView, Image, StyleSheet, Text } from 'react-native';
 
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.png';
+import ObservationList from '../components/ObservationList';
 
-export default function Observation() {
+export default function Observation({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
             <Image style={styles.logo} source={logo} />
-            <Text>Observação do Paciente</Text>
+            <ObservationList navigation={ 1, navigation}  />
         </SafeAreaView>
     )
 }

@@ -4,7 +4,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 import api from '../services/api'; 
 
-export default function ConditionList({ patientId, navigation }){
+export default function ConditionForm({ condition, patientId }){
 
     const apiVersion = '4_0_0';
     const [conditions, setConditions] = useState([]);
@@ -14,42 +14,22 @@ export default function ConditionList({ patientId, navigation }){
             const response = await api.get('4_0_0/Condition');
             setConditions(response.data);
         }
-
+        console.log(condition);
         loadConditions();
     }, [])
 
-    function handleInsert(patientId){
-        navigation.navigate('ConditionForm');
+    function handleConfirm(){
+        navigation.navigate('Condition');
     }
 
-    function handleEdit(condition){
-        navigation.navigate('ConditionForm');
-    }
-
-    function handleDelete(){
-        //
-    }    
+    function handleCancel(){
+        navigation.navigate('Condition');
+    }   
 
     return (
         <ScrollView>
             <View>
-                { conditions.map((condition, index) => (
-                    <View style={styles.card} key={condition.id}  >
-                        <Text>Condições do Paciente</Text>
-                        <View style={styles.footer}>
-                            <Text style={styles.boldText}> { condition.text.status }</Text>
-                            <Text style={styles.normalText}> { condition.code.text }</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={styles.button} onPress={() => handleEdit(condition)}>
-                                {/* <Image source={iconQuestion} /> */}
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.button} onPress={handleDelete}>
-                                {/* <Image source={iconQuestion} /> */}
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                ))} 
+                
             </View>
         </ScrollView>
     )
@@ -62,7 +42,6 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     card: {
-        flexDirection: "row",
         borderWidth: 1,
         borderColor: '#DDD',
         borderRadius: 8,

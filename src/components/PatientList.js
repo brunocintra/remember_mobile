@@ -1,30 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import Moment from 'moment';
 
 import api from '../services/api'; 
 
 import patientIcon from '../../assets/patient-icon.png';
 import iconObservation from '../../assets/icon-observation.png'
-import iconQuestion from '../../assets/icon-question.png'
-import iconCondition from '../../assets/icon-condition.png'
 
 export default function PatientList({ navigation }){
     
-    function handleObservation(){
-        navigation.navigate('Observation');
-    }
-
-    function handleCondition(){
-        navigation.navigate('Condition');
-    }
-
-    function handleQuestionnaireResponse(){
-        navigation.navigate('QuestionnaireResponse');
-    }
-
     const apiVersion = '3_0_1';
     const [patients, setPatients] = useState([]);
+
+    function handleObservation(){
+        navigation.navigate('Observation', { navigation: navigation });
+    }
 
     useEffect(() => {
         async function loadPatients(){
@@ -43,18 +34,12 @@ export default function PatientList({ navigation }){
                         <Image source={patientIcon} style={styles.patientIcon} />
                         <View style={styles.footer}>
                             <Text style={styles.footerName} > {patient.name[0].given[0]} {patient.name[0].family} </Text>
-                            <Text style={styles.footerIdade}> {patient.birthDate} </Text>
+                            <Text style={styles.footerIdade}> {Moment(patient.birthDate).calendar() } </Text>
                         </View>
 
                         <View style={styles.buttonsContainer}>
-                        <TouchableOpacity style={styles.button} onPress={handleObservation}>
+                            <TouchableOpacity style={styles.button} onPress={handleObservation}>
                                 <Image source={iconObservation} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.button} onPress={handleCondition}>
-                                <Image source={iconCondition} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.button} onPress={handleQuestionnaireResponse}>
-                                <Image source={iconQuestion} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -63,8 +48,7 @@ export default function PatientList({ navigation }){
                 
             </View>
         </ScrollView>
-        
-    ) 
+    )
 }
 
 const styles = StyleSheet.create({
@@ -86,7 +70,7 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         margin: 30,
         alignItems: "center",
-        height: 400,
+        height: 300,
     },
     footer: {
         backgroundColor: '#FFF',
@@ -95,7 +79,7 @@ const styles = StyleSheet.create({
     },
     patientIcon: {
         flex: 1,
-        width: 240,
+        width: 200,
         resizeMode: "contain"
     },
     footerName: {
